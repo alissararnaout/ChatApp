@@ -1,6 +1,6 @@
-# ChatterBox - Chat App using Socket.io
+# ChatterBox
 
-A chat application using Node, Express, Vue.js and Socket.io
+A chat application built using Node, Express, Vue.js and Socket.io
 
 
 ### Installing
@@ -23,10 +23,10 @@ npm install
 
 run this application on your local host 
 ```
-http://localhost:3000
+localhost:3000
 ```
 
 
 ## Authors
 
-* **Alissar Arnaout**
+**Alissar Arnaout**
