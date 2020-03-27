@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <title>ChatterBox - Socket.io App</title>
 </head>
@@ -55,86 +56,9 @@
             </div>
         </div>
 
-
     <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js" integrity="sha256-NSuqgY2hCZJUN6hDMFfdxvkexI7+iLxXQbL540RQ/c4=" crossorigin="anonymous"></script>
-    <script>
-  var socket = io();
-  let app = new Vue({
-      el: '#app', // bind with app element
-      data: {
-        newmessage: null,
-        messages: [],
-        typing: false,
-        online: [],
-        name: null,
-        ready: false,
-        info: [],
-        connectionCount: 0
-      },
-      methods: {
-        send() {
-            socket.emit('chat-message', { message: this.newmessage, user: this.name })
-            this.messages.push({ message: this.newmessage, type: 0, by: 'Me' })
-            this.newmessage = null // clear out new mssg
-          },
-          isTyping() {
-              socket.emit('typing', this.name)
-          },
-          setName() {
-              socket.emit('joined', this.name)
-              this.ready = true
-          }
-      },
-
-      mounted() {
-          window.onbeforeunload = () => {
-              socket.emit('left', this.name)
-          }
-          socket.on('connections', (count) => {
-              this.connectionCount = count
-          })
-      },
-
-      watch: {
-        newmessage(value) {
-            value ? socket.emit('typing', this.name) : socket.emit('stopTyping')
-        }
-      },
-
-      created() {
-          socket.on('chat-message', (data) => {
-              this.messages.push({ message: data.message, type: 1, by: data.user})
-              this.typing = false
-          })
-
-          socket.on('typing', (data) => {
-              console.log(data)
-              this.typing = data
-          })
-
-          socket.on('stopTyping', () => {
-              this.typing = false
-          })
-
-          socket.on('left', (name) => {
-              this.online.splice(this.online.indexOf(name))
-              this.info.push({ name: name, type:'Left' })
-              setTimeout(() => {
-                  this.info = []
-              }, 5000);
-          })
-
-          socket.on('joined', (data) => {
-              this.info.push({ name:data,type:'Joined' })
-              setTimeout(() => {
-                  this.info = []
-              }, 5000);
-          })
-
-      }
-  })
-
-</script>
+    
 </body>
 </html>

@@ -5,12 +5,11 @@ let http = require('http').Server(app);
 let io = require('socket.io')(http);
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/views/index.html');
 })
 
-
 // listen for socket connection
-io.on('connections', (socket) => {
+io.on('connection', (socket) => {
     io.emit('connections',Object.keys(io.sockets.connected).length) // number of connections
 
     socket.on('disconnect', () => {
