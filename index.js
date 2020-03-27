@@ -13,15 +13,36 @@ http.listen(3000, () => {
 
 // listen for socket connection
 io.on('connection', (socket) => {
-    console.log('there is a connection')
+    io.emit('connections',Object.keys(io.sockets.connected).length) // number of connections
 
     socket.on('disconnect', () => {
         console.log('Disconnected');
     })
 
-    // listen for created event - multiple connections
+    // listen for created events
     socket.on('Created',(data) => {
         socket.broadcast.emit('Created', (data))
     })
+
+    // user is typing
+    socket.on('typing',(data) => {
+        socket.broadcast.emit('typing',(data))
+    })
+
+    // user has stopped typing
+    socket.on('stopTyping',(data) => {
+        socket.broadcast.emit('stopTyping',(data))
+    })
+
+    // user joined the chat / connected
+    socket.on('joined', (data) => {
+        socket.broadcast.emit('joined',(data))
+    })
+
+    // user has left the chat / disconnected
+    socket.on('left', (data) => {
+        socket.broadcast.emit('left',(data))
+    })
+
 
 })
