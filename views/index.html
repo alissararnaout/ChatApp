@@ -13,7 +13,7 @@
     <div class ="container" id="app">
             <div class="col-md-4 col-lg-6 offset-lg-3 offset-md-4">  
                 <div v-if="ready">
-                    <h4>{{name}}</h4>
+                    <h4>ChatterBox</h4>
                     <p v-for="item in info">
                     <small>{{ item.name }} {{ item.type }}</small>
                     </p>
@@ -30,8 +30,8 @@
 
                 <div class="card bg-info" v-if="ready">
                     <div class="card-header">
-                      My Chat App 
-                      <span class="float-right">{{connectionCount}} connections, {{online.length}} Online</span>
+                      {{name}} 
+                      <span class="float-right">{{connectionCount}} User(s) Connected, {{online.length}} Online</span>
                     </div>
 
                     <ul class="list-group list-group-flush text-right">
