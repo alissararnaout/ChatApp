@@ -1,8 +1,12 @@
 let app = require('express')();
 
+var express = require('express');
+
 let http = require('http').Server(app);
 
 let io = require('socket.io')(http);
+
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
