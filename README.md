@@ -1,6 +1,6 @@
 # ChatterBox
 
-A chat application built using Node, Express, Vue.js and Socket.io
+A chat application built using Node, Express, Bootstrap, Vue.js and Socket.io
 
 
 ### Installing
